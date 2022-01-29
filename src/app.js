@@ -25,14 +25,14 @@ hbs.registerPartials(partialsPath);
 app.get('/', (request, response) => {
     response.render('index', {
         title: 'Weather',
-        name: 'Bob'
+        name: 'Gray Cat'
     });
 });
 
 app.get('/about', (request, response) => {
     response.render('about', {
         title: 'About me',
-        name: 'Bob'
+        name: 'Gray Cat'
     });
 });
 
@@ -40,7 +40,7 @@ app.get('/help', (request, response) => {
     response.render('help', {
         title: 'Help page',
         message: "Helpful information",
-        name: 'Bob'
+        name: 'Gray Cat'
     });
 });
 
@@ -87,13 +87,14 @@ app.get("/weather", (request, response) => {
             console.log("Longtitude: " + longitude);
             console.log("Latitude: " + latitude + "\n");
 
-            weather({latitude, longitude}, (error, {temperature, precip: rainProbability}) => {
+            weather({latitude, longitude}, (error, {temperature, precip: rainProb, weather_descriptions}) => {
                 if (!error) {
+                    console.log(`Weather descriptions: : ${weather_descriptions}`);
                     console.log(`Temperature: ${temperature} C`);
-                    console.log(`Rain probability ${rainProbability} %`);
+                    console.log(`Rain probability ${rainProb} %`);
                     response.send({
-                        location: location,
-                        forecast: `Temperature: ${temperature} C. Rain probability ${rainProbability} %`
+                        location,
+                        forecast: `${weather_descriptions}. Temperature: ${temperature} C. Rain probability ${rainProb} %`
                     });
                 }
                 else {
@@ -121,7 +122,7 @@ app.get('/help/*', (request, response) => {
     response.render('404page', {
         title: '404', 
         message: 'Help article not found',
-        name: 'Bob'
+        name: 'Gray Cat'
     });
 });
 
@@ -131,7 +132,7 @@ app.get('*', (request, response) => {
     response.render('404page', { 
         title: '404',
         message: 'Page not found', 
-        name: 'Bob'});
+        name: 'Gray Cat'});
 });
 
 app.listen(port, () => console.log(`Server is up on port ${port}`));

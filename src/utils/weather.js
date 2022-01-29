@@ -16,6 +16,7 @@ const weather = ({latitude, longitude}, callback) => {
             console.log(data);
             console.log('-----------------------------------------------');
             callback(undefined, {
+                weather_descriptions: data.current.weather_descriptions,
                 temperature: data.current.temperature,
                 precip: data.current.precip
             });
